@@ -1,10 +1,11 @@
 import React from 'react';
 import Aux from '../../Auxilury/Auxi';
 import './Layout.css';
+import Toolbar from '../../components/Navigation/Toolbar';
 
 const Layout = (props) => (
 	<Aux>
-		<div>Toolbar, sidebar, backdrop</div>
+		<Toolbar />
 		<main className="mt-10">
 			{ props.children}
 		</main>
