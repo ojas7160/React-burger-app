@@ -4,9 +4,14 @@ import Aux from '../../../Auxilury/Auxi';
 import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends Component {
+
   shouldComponentUpdate (nextProps, nextState) {
     return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
   } 
+
+  UNSAFE_componentWillUpdate() {
+    console.log('modal will update')
+  }
 
   render () {
     return (
@@ -19,6 +24,5 @@ class Modal extends Component {
     )
   }
 } 
-  
 
 export default Modal; 
