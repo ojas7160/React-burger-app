@@ -69,7 +69,8 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-                value: '',
+                value: 'fastest',
+                validation: {},
                 valid: true,
                 touched: false
             }
@@ -80,6 +81,9 @@ class ContactData extends Component {
     
     checkValidity (value, rules) {
         let isValid = false;
+        if(!rules) {
+            return true;
+        }
 
         if(rules.required) {
             isValid = value.trim() !== '';
