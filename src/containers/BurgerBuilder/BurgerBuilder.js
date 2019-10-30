@@ -18,7 +18,12 @@ class BurgerBuilder extends Component {
 		this.modalCloseHandler = this.modalCloseHandler.bind(this)
 		this.state = {
 			purchasable: false,
-			
+			ingredients: {
+				salad: 0,
+				bacon: 0,
+				cheese: 0,
+				meat: 0
+			}
 		}
 	}
 
@@ -120,6 +125,7 @@ class BurgerBuilder extends Component {
 	}
 }
 const mapStateToProps = (state) => {
+  console.log("TCL: mapStateToProps -> state", state)
 	return {
 		ingredients: state.ingredients,
 		totalPrice: state.totalPrice,

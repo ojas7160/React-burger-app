@@ -33,7 +33,7 @@ export const initIngredients = () => {
     AxiosInstance.get('ingredients.json')
 		.then(res => {
       console.log(res)
-			dispatch(setIngredients(res.data));
+			dispatch(setIngredients(res.data ? res.data : {salad: 0, bacon: 0, meat: 0, cheese: 0}));
 		})
 		.catch(err => {
 			dispatch(fetchIngredientsFailed())
