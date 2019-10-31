@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-labels */
 import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -5,6 +7,8 @@ import './ContactData.css';
 import AxiosInstance from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 import { connect } from 'react-redux';
+import withErrorHandler from '../../../Auxilury/withErrorHandling/withErrorHandling';
+import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
     state = {
@@ -102,7 +106,9 @@ class ContactData extends Component {
 			ingredients: this.props.ingredients,
             price: this.props.price,
             orderData: formData 
-		}
+        }
+        
+        this.props.onOrderBurger(order);
 
 		// AxiosInstance.get('orders.json')
 		// .then(res => {
@@ -157,7 +163,7 @@ class ContactData extends Component {
                 <Button className="Input" btnType="Success" disabled={!this.state.formIsValid}>Order</Button>
             </form>
         );
-        if(this.state.loading) {
+        if(this.props.loading) {
             form = <Spinner />
         }
         return (
@@ -171,9 +177,16 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
-        price: state.totalPrice
+        ingredients: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
     }
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+    return{
+        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, AxiosInstance));

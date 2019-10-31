@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import ContactData from './ContactData/ContactData';
 import { connect } from 'react-redux'
 
@@ -34,15 +34,26 @@ class Checkout extends Component {
 
 
     render () {
+        let summary = <Redirect to="/"/>
+        if(this.props.ingredients){
+            summary = (
+                <div>
+                    <CheckoutSummary
+                    checkoutContinue={this.checkoutContinueHandler}
+                    checkoutCancel={this.checkoutCancelHandler}
+                    ingredients={this.props.ingredients}/>
+                    {/*    
+                    <Route path={this.props.match.path + '/contact-data'} render={(props) => (<ContactData ingredients={this.props.ingredients} price={this.state.totalPrice} {...props}/>)}/>
+                    */}  
+                
+                    <Route path={this.props.match.path + '/contact-data'} component={ContactData} />
+                </div>
+            )
+        }
         return (
             <div>
-                <CheckoutSummary
-                checkoutContinue={this.checkoutContinueHandler}
-                checkoutCancel={this.checkoutCancelHandler}
-                ingredients={this.props.ingredients}/>
-                {/* <Route path={this.props.match.path + '/contact-data'} render={(props) => (<ContactData ingredients={this.props.ingredients} price={this.state.totalPrice} {...props}/>)}/>
-             */}
-             <Route path={this.props.match.path + '/contact-data'} component={ContactData} />
+                {summary}
+                
             </div>
         )
     }
@@ -50,8 +61,8 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
-        totalPrice: state.totalPrice
+        ingredients: state.burgerBuilder.ingredients,
+        totalPrice: state.burgerBuilder.totalPrice
     }
 }
 
