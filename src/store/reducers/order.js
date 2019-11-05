@@ -7,6 +7,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+  console.log("TCL: reducer -> action", action)
   switch(action.type) {
     case actionTypes.PURCHASE_INIT:
       return {
@@ -34,6 +35,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
+    case actionTypes.FETCH_ORDERS_START:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case actionTypes.FETCH_ORDERS_SUCCESS:
+      console.log(action.orders)
+      return {
+        ...state,
+        orders: action.orders
+      }
+    case actionTypes.FETCH_ORDERS_FAIL:
+      return {
+        ...state,
+        loading: false
+      }
     default:
       return state;
   }
