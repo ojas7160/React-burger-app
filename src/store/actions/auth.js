@@ -44,7 +44,7 @@ export const auth = (email, password) => {
       email: 'ojas@ww.com',
       password: 'ojas7160'
     }
-    axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]', auth)
+    axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key='AIzaSyDIMcE8EyWEIZuZ11sJzeESbOBjyvV5Nek'", auth)
     .then(res => {
       console.log(res)
       dispatch(authSuccess(res.data.idToken, res.data.localId));
