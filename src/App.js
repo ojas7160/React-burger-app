@@ -23,7 +23,7 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Switch>
-          <Route path="/Auth" component={Auth} />
+            <Route path="/Auth" component={Auth} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/orders" component={Orders} />
             <Route path="/" exact component={BurgerBuilder} />

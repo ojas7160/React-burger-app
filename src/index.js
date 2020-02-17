@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk) // thunk is a middleware for react which comes into play when we use action creators functionally instead of making the actions manually, action creators by function means that function passes dispatch as its argument and returns the object with type which we pass and prevents from typos or we can hit an external APIs. Thunk will take care if the action creator function doesn't pass dispatch as argument, thunk auto pass it as a first argument.
 ));
 
 const app = (
